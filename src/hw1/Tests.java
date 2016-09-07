@@ -243,4 +243,22 @@ public class Tests {
         }
         assertEquals(10.0, cr.getTotal(), DELTA);
     }
+
+    @Test
+    public void testRefund() throws Exception {
+        cr.addMoney(MONEY_MAP);
+        assertEquals(MONEY_MAP_TOTAL, cr.getTotal(), DELTA);
+        assertEquals(MONEY_MAP_COIN_COUNT, cr.getCount(Currency.Type.COIN));
+        assertEquals(MONEY_MAP_BILL_COUNT, cr.getCount(Currency.Type.BILL));
+        cr.recordPurchase(-15.85);
+
+        ArrayList<Currency> change = new ArrayList<>();
+        for (int i = 0; i < 3; i++)
+            change.add(Currency.FiveDollar.get());
+        for (int i = 0; i < 3; i++)
+            change.add(Currency.Quarter.get());
+        for (int i = 0; i < 2; i++)
+            change.add(Currency.Nickel.get());
+        assertEquals(change, cr.giveChange());
+    }
 }
