@@ -227,7 +227,7 @@ public class Tests {
     public void testBadData() throws Exception {
         // Passing a null value for any of the data structures
         try {
-            cr.enterPayment(null);
+            assertEquals(false, cr.enterPayment(null));
         } catch (Exception ex) {
             fail("Enter payment should be able to handle bad data.");
         }
