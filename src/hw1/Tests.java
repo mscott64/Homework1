@@ -260,5 +260,8 @@ public class Tests {
         for (int i = 0; i < 2; i++)
             change.add(Currency.Nickel.get());
         assertEquals(change, cr.giveChange());
+        assertEquals(MONEY_MAP_TOTAL - 15.85, cr.getTotal(), DELTA);
+        assertEquals(MONEY_MAP_COIN_COUNT - 5, cr.getCount(Currency.Type.COIN));
+        assertEquals(MONEY_MAP_BILL_COUNT - 3, cr.getCount(Currency.Type.BILL));
     }
 }
